@@ -1,7 +1,11 @@
 package com.carraqueta.carraqueta.entity;
 
 import com.carraqueta.carraqueta.enumeration.EnumMarca;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +19,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "VEICULO")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Veiculo {
+
+    public Veiculo(String modelo, EnumMarca marca, String placa, Integer ano) {
+        this.modelo = modelo;
+        this.marca = marca;
+        this.placa = placa;
+        this.ano = ano;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="veiculo_seq")
     @SequenceGenerator(name="veiculo_seq")
@@ -32,7 +46,7 @@ public class Veiculo {
     @Column(name = "PLACA",nullable = false, unique = true, length = 7)
     private String placa;
 
-    @Column(name = "ANO",nullable = false, unique = true, length = 7)
+    @Column(name = "ANO",nullable = false, length = 7)
     private Integer ano;
 
 }

@@ -1,6 +1,9 @@
 package com.carraqueta.carraqueta.entity;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +19,19 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LOCACAO")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Locacao {
+
+    public Locacao(String nomeCliente, String cpf, LocalDateTime dataEntrada, BigDecimal valor, Veiculo veiculo) {
+        this.nomeCliente = nomeCliente;
+        this.cpf = cpf;
+        this.dataEntrada = dataEntrada;
+        this.valor = valor;
+        this.veiculo = veiculo;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="locacao_seq")
     @SequenceGenerator(name="locacao_seq")
@@ -26,7 +40,7 @@ public class Locacao {
     @Column(name = "NOME_CLIENTE",nullable = false)
     private String nomeCliente;
 
-    @Column(name = "CPF",nullable = false)
+    @Column(name = "CPF",nullable = false, length = 11)
     private String cpf;
 
     @Column(name = "DATA_ENTRADA", nullable = false)
